@@ -1,10 +1,6 @@
 <?php
 
 include 'global/config.php';
-
-ini_set('session.save_path', '/data');
-//Retrieving the session save path
-$res = session_save_path();	
 		 
 //Starting the session
 session_start();	
@@ -68,11 +64,11 @@ if (isset($_POST["signin"])) {
             <h2 class="title">Inico de Sesión</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Correo Electronico" name="email" id="email"/>
+              <input type="text" placeholder="Correo Electronico" name="email" id="email" value="<?php echo $_POST['email']; ?>" required/>
             </div>
             <div class="input-field">
               <i class="uil uil-eye-slash showHidePw"></i>
-              <input type="password" class="password" placeholder="Contraseña" name="password" id="password"/>
+              <input type="password" class="password" placeholder="Contraseña" name="password" id="password" value="<?php echo $_POST['password']; ?>" required />
             </div>
             <input type="submit" value="Iniciar" name="signin" class="btn solid" />
           </form>
@@ -81,19 +77,19 @@ if (isset($_POST["signin"])) {
             <h2 class="title">Registro</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Nombre de Usuario" name="signup_full_name" id="signup_full_name" />
+              <input type="text" placeholder="Nombre de Usuario" name="signup_full_name" id="signup_full_name" value="<?php echo $_POST["signup_full_name"]; ?>" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" name="signup_email" id="signup_email"/>
+              <input type="email" placeholder="Email" name="signup_email" id="signup_email" value="<?php echo $_POST["signup_email"]; ?>" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" class="password" placeholder="Contraseña" name="signup_password" id="signup_password" require/>
+              <input type="password" class="password" placeholder="Contraseña" name="signup_password" id="signup_password" value="<?php echo $_POST["signup_password"]; ?>" required/>
             </div>
             <div class="input-field">
                 <i class="uil uil-eye-slash showHidePw"></i>
-                <input type="password" class="password" placeholder="Confirmar contraseña" name="signup_cpassword" id="signup_cpassword" require/>
+                <input type="password" class="password" placeholder="Confirmar contraseña" name="signup_cpassword" id="signup_cpassword" value="<?php echo $_POST["signup_cpassword"]; ?>" required/>
                 
               </div>
             <input type="submit" class="btn" name="signup" value="Registrate" />
