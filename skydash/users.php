@@ -1,4 +1,21 @@
-
+<?php
+ob_start();
+session_start();
+?>
+<?php
+ session_start();
+ if(!isset($_SESSION['user_name'])){
+     echo '
+        <script>
+        alert("Debes iniciar sesi��n");
+        
+        </script>
+    ';
+    //header("location: .../login_register.php");
+    session_destroy();
+    die();
+ }
+?>
 
 <?php include './headcode.php';?>
 <?php
