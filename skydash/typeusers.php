@@ -1,6 +1,10 @@
 
 <?php
- /*session_start();
+ob_start();
+session_start();
+?>
+<?php
+ session_start();
  if(!isset($_SESSION['user_name'])){
      echo '
         <script>
@@ -11,7 +15,7 @@
     //header("location: .../login_register.php");
     session_destroy();
     die();
- }*/
+ }
 ?>
 <?php include './headcode.php';?>
 <?php
