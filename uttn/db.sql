@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: test4
+-- Host: localhost    Database: test
 -- ------------------------------------------------------
 -- Server version	10.4.24-MariaDB
 
@@ -16,320 +16,275 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `actividades`
+-- Table structure for table `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `actividades`;
+DROP TABLE IF EXISTS `failed_jobs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `actividades` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Actividad` varchar(255) NOT NULL,
-  `Valor` int(3) NOT NULL,
-  `idMateria` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Materiaid` (`idMateria`),
-  CONSTRAINT `Materiaid` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `actividades`
+-- Dumping data for table `failed_jobs`
 --
 
-LOCK TABLES `actividades` WRITE;
-/*!40000 ALTER TABLE `actividades` DISABLE KEYS */;
-/*!40000 ALTER TABLE `actividades` ENABLE KEYS */;
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `capacidad`
+-- Table structure for table `migrations`
 --
 
-DROP TABLE IF EXISTS `capacidad`;
+DROP TABLE IF EXISTS `migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `capacidad` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Capacidad` varchar(255) NOT NULL,
-  `Criterio` varchar(255) NOT NULL,
-  `idMateria` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Materia_id` (`idMateria`),
-  CONSTRAINT `Materia_id` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `capacidad`
+-- Dumping data for table `migrations`
 --
 
-LOCK TABLES `capacidad` WRITE;
-/*!40000 ALTER TABLE `capacidad` DISABLE KEYS */;
-INSERT INTO `capacidad` VALUES (3,'sda','asd','AddTest'),(4,'sdad','asd','AddTest2'),(7,'fds','fds','efw');
-/*!40000 ALTER TABLE `capacidad` ENABLE KEYS */;
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1),(5,'2022_06_21_232216_create_permission_tables',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `carrera`
+-- Table structure for table `model_has_permissions`
 --
 
-DROP TABLE IF EXISTS `carrera`;
+DROP TABLE IF EXISTS `model_has_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `carrera` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Carrera` varchar(255) NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) unsigned NOT NULL,
+  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `carrera`
+-- Dumping data for table `model_has_permissions`
 --
 
-LOCK TABLES `carrera` WRITE;
-/*!40000 ALTER TABLE `carrera` DISABLE KEYS */;
-INSERT INTO `carrera` VALUES (1,'TÉCNICO SUPERIOR UNIVERSITARIO EN TECNOLOGÍAS DE LA INFORMACIÓN, ÁREA DESARROLLO DE SOFTWARE MULTIPLATAFORMA'),(2,'TSU EN TECNOLOGÍAS DE LA INFORMACIÓN, ÁREA ENTORNOS VIRTUALES Y NEGOCIOS DIGITALES'),(3,'INGENIERÍA EN DESARROLLO Y GESTIÓN DE SOFTWARE'),(4,'INGENIERÍA EN ENTORNOS VIRTUALES Y NEGOCIOS DIGITALES');
-/*!40000 ALTER TABLE `carrera` ENABLE KEYS */;
+LOCK TABLES `model_has_permissions` WRITE;
+/*!40000 ALTER TABLE `model_has_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `model_has_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `cuatrimestre`
+-- Table structure for table `model_has_roles`
 --
 
-DROP TABLE IF EXISTS `cuatrimestre`;
+DROP TABLE IF EXISTS `model_has_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `cuatrimestre` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Cuatrimestre` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) unsigned NOT NULL,
+  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cuatrimestre`
+-- Dumping data for table `model_has_roles`
 --
 
-LOCK TABLES `cuatrimestre` WRITE;
-/*!40000 ALTER TABLE `cuatrimestre` DISABLE KEYS */;
-INSERT INTO `cuatrimestre` VALUES (1,'Primero'),(2,'Segundo'),(3,'Tercero'),(4,'Cuarto'),(5,'Quinto'),(6,'Sexto'),(7,'Septimo'),(8,'Octavo'),(9,'Noveno'),(10,'Decimo'),(11,'Onceavo');
-/*!40000 ALTER TABLE `cuatrimestre` ENABLE KEYS */;
+LOCK TABLES `model_has_roles` WRITE;
+/*!40000 ALTER TABLE `model_has_roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `model_has_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `espacio`
+-- Table structure for table `password_resets`
 --
 
-DROP TABLE IF EXISTS `espacio`;
+DROP TABLE IF EXISTS `password_resets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `espacio` (
-  `ID` int(1) NOT NULL AUTO_INCREMENT,
-  `Espacio` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `espacio`
+-- Dumping data for table `password_resets`
 --
 
-LOCK TABLES `espacio` WRITE;
-/*!40000 ALTER TABLE `espacio` DISABLE KEYS */;
-INSERT INTO `espacio` VALUES (1,'Aula'),(2,'Laboratorio/Taller'),(3,'Empresa');
-/*!40000 ALTER TABLE `espacio` ENABLE KEYS */;
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `fuentes`
+-- Table structure for table `permissions`
 --
 
-DROP TABLE IF EXISTS `fuentes`;
+DROP TABLE IF EXISTS `permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `fuentes` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Año` int(4) NOT NULL,
-  `Autor` varchar(255) NOT NULL,
-  `Titulo` varchar(255) DEFAULT NULL,
-  `Ciudad` varchar(255) DEFAULT NULL,
-  `Pais` varchar(255) DEFAULT NULL,
-  `Editorial` varchar(255) DEFAULT NULL,
-  `idMateria` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Materia` (`idMateria`),
-  CONSTRAINT `Materia` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `permissions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `fuentes`
+-- Dumping data for table `permissions`
 --
 
-LOCK TABLES `fuentes` WRITE;
-/*!40000 ALTER TABLE `fuentes` DISABLE KEYS */;
-INSERT INTO `fuentes` VALUES (2,1234,'asdfu','dcs','qw','wq','wq','AddTest'),(3,1234,'asd','dcs','qw','wq','we','AddTest2'),(6,13334,'sfd','cvx','xvc','cxv','cxv','efw');
-/*!40000 ALTER TABLE `fuentes` ENABLE KEYS */;
+LOCK TABLES `permissions` WRITE;
+/*!40000 ALTER TABLE `permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `materia`
+-- Table structure for table `personal_access_tokens`
 --
 
-DROP TABLE IF EXISTS `materia`;
+DROP TABLE IF EXISTS `personal_access_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `materia` (
-  `idMateria` varchar(250) NOT NULL,
-  `Nombre` varchar(255) DEFAULT NULL,
-  `carrera` int(11) NOT NULL,
-  `competencias` varchar(255) DEFAULT NULL,
-  `cuatrimestre` int(11) DEFAULT NULL,
-  `objetivo` varchar(150) DEFAULT NULL,
-  `hpracticas` int(3) DEFAULT NULL,
-  `hteoricas` int(3) DEFAULT NULL,
-  `htotales` int(3) DEFAULT NULL,
-  `IdProfesor` int(3) DEFAULT NULL,
-  PRIMARY KEY (`idMateria`),
-  KEY `carerra` (`carrera`),
-  KEY `cuatrimestre` (`cuatrimestre`),
-  CONSTRAINT `carerra` FOREIGN KEY (`carrera`) REFERENCES `carrera` (`ID`) ON UPDATE CASCADE,
-  CONSTRAINT `cuatrimestre` FOREIGN KEY (`cuatrimestre`) REFERENCES `cuatrimestre` (`ID`) ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `materia`
+-- Dumping data for table `personal_access_tokens`
 --
 
-LOCK TABLES `materia` WRITE;
-/*!40000 ALTER TABLE `materia` DISABLE KEYS */;
-INSERT INTO `materia` VALUES ('AddTest','fdsfdsvcbxcfdsavusyfydsgtfgdc',3,'9',1,'1',1,124,124,NULL),('AddTest2','Test Asignature',3,'Explaen',1,'efdwd',1,1,1,NULL),('efw','dsf',3,'fds',3,'fds',1,1,2,NULL);
-/*!40000 ALTER TABLE `materia` ENABLE KEYS */;
+LOCK TABLES `personal_access_tokens` WRITE;
+/*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `proceso`
+-- Table structure for table `role_has_permissions`
 --
 
-DROP TABLE IF EXISTS `proceso`;
+DROP TABLE IF EXISTS `role_has_permissions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proceso` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Resultado` varchar(255) NOT NULL,
-  `Secuencia` varchar(255) NOT NULL,
-  `Instrumento` varchar(255) NOT NULL,
-  `idMateria` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `MateriaProceso` (`idMateria`),
-  CONSTRAINT `MateriaProceso` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) unsigned NOT NULL,
+  `role_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `role_has_permissions_role_id_foreign` (`role_id`),
+  CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `proceso`
+-- Dumping data for table `role_has_permissions`
 --
 
-LOCK TABLES `proceso` WRITE;
-/*!40000 ALTER TABLE `proceso` DISABLE KEYS */;
-INSERT INTO `proceso` VALUES (7,'sasfd','asdfs','asdfds','AddTest'),(8,'sad','asd','asdd','AddTest2'),(11,'dfs','dfs','fds','efw');
-/*!40000 ALTER TABLE `proceso` ENABLE KEYS */;
+LOCK TABLES `role_has_permissions` WRITE;
+/*!40000 ALTER TABLE `role_has_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `role_has_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `procesoense`
+-- Table structure for table `roles`
 --
 
-DROP TABLE IF EXISTS `procesoense`;
+DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `procesoense` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Metodos` varchar(255) NOT NULL,
-  `Medios` varchar(255) NOT NULL,
-  `Espacio` int(1) NOT NULL,
-  `idMateria` varchar(250) NOT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `Espacio` (`Espacio`),
-  KEY `MateriaProcesoen` (`idMateria`),
-  CONSTRAINT `Espacio` FOREIGN KEY (`Espacio`) REFERENCES `espacio` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `MateriaProcesoen` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `roles` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `procesoense`
+-- Dumping data for table `roles`
 --
 
-LOCK TABLES `procesoense` WRITE;
-/*!40000 ALTER TABLE `procesoense` DISABLE KEYS */;
-INSERT INTO `procesoense` VALUES (4,'adssf','asdfsd',1,'AddTest'),(5,'adsd','asdd',1,'AddTest2'),(8,'fd','dfs',2,'efw');
-/*!40000 ALTER TABLE `procesoense` ENABLE KEYS */;
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `tema`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `tema`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tema` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Temas` varchar(255) NOT NULL,
-  `Saber` varchar(255) NOT NULL,
-  `Saberhacer` varchar(255) NOT NULL,
-  `Ser` varchar(250) NOT NULL,
-  `idMateria` varchar(250) NOT NULL,
-  `fechaI` datetime DEFAULT NULL,
-  `fechaF` datetime DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `MateriaTema` (`idMateria`),
-  CONSTRAINT `MateriaTema` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tema`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `tema` WRITE;
-/*!40000 ALTER TABLE `tema` DISABLE KEYS */;
-INSERT INTO `tema` VALUES (16,'fdvsfd','asdfsdfjgfj','adsfds','asdfd','AddTest',NULL,NULL),(17,'fdvd','asd','ads','asd','AddTest2',NULL,NULL),(20,'sfd','ds','dsf','fds','efw',NULL,NULL);
-/*!40000 ALTER TABLE `tema` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `unidad`
---
-
-DROP TABLE IF EXISTS `unidad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `unidad` (
-  `ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Tema` varchar(255) NOT NULL,
-  `horaprac` int(3) NOT NULL,
-  `horateo` int(3) NOT NULL,
-  `horatotal` int(3) NOT NULL,
-  `idMateria` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  KEY `MateriaUnidad` (`idMateria`),
-  CONSTRAINT `MateriaUnidad` FOREIGN KEY (`idMateria`) REFERENCES `materia` (`idMateria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `unidad`
---
-
-LOCK TABLES `unidad` WRITE;
-/*!40000 ALTER TABLE `unidad` DISABLE KEYS */;
-INSERT INTO `unidad` VALUES (59,'dsgkghk',1,1,1,'AddTest'),(60,'dsd',1,1,1,'AddTest2'),(63,'ads',1,1,2,'efw');
-/*!40000 ALTER TABLE `unidad` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -341,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 13:34:33
+-- Dump completed on 2022-11-30 13:36:37
